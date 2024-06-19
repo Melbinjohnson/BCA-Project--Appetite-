@@ -1,0 +1,56 @@
+{% include 'organization_header.html' %}
+<form action="" method="post"  enctype="multipart/form-data" >
+<center>
+    <h2 style="padding-top: 60px;" class="text-white">Profile</h2>
+    <table class="table " style="width: 500px;">
+        <tr>
+            <th>Organization  Name</th>
+            <td><input type="text" required  pattern="[ a-zA-Z]{1,}" {% if data['edit'] %} {% else %} readonly {% endif %}   value="{% if data['edit'] %} {{data['edit'][0]['name']}} {% else %} {{data['res'][0]['name']}}  {% endif %}" class="form-control" name="oname"></td>
+        </tr>
+        <tr>
+            <th>Organization Place</th>
+            <td><input type="text" required pattern="[ a-zA-Z]{1,}" class="form-control" {% if data['edit'] %} {% else %} readonly {% endif %}  name="place"  value="{% if data['edit'] %} {{data['edit'][0]['place']}} {% else %} {{data['res'][0]['place']}} {% endif %}"></td>
+        </tr>
+        <tr>
+            <th>Organization Phone</th>
+            <td><input type="text" required class="form-control" maxlength="10" pattern="[0-9]{10}" {% if data['edit'] %} {% else %} readonly pattern="[0-9]{10}"  {% endif %}  name="phone"  value="{% if data['edit'] %} {{data['edit'][0]['phone']}} {% else %} {{data['res'][0]['phone']}} {% endif %}"></td>
+        </tr>
+        <tr>
+            <th>Organization Email</th>
+            <td><input type="email" required class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" {% if data['edit'] %} {% else %} readonly {% endif %}  name="email"  value="{% if data['edit'] %} {{data['edit'][0]['email']}} {% else %} {{data['res'][0]['email']}} {% endif %}"></td>
+        </tr>
+        <tr>
+            <th>License </th>
+            <td><input type="file" required class="form-control" {% if data['edit'] %} {% else %} readonly {% endif %}  name="image"  value="{% if data['edit'] %} {{data['edit'][0]['image']}} {% else %} {{data['res'][0]['image']}} {% endif %}"></td>
+        </tr>
+        <!-- <tr>
+            <th>User Name</th>
+            <td><input type="text" required class="form-control" name="uname"></td>
+        </tr>
+        <tr>
+            <th>Password </th>
+            <td><input type="password" required class="form-control" name="passw"></td>
+        </tr>
+        <tr> -->
+            <!-- <th>Resturant Name</th> -->
+            <td colspan="2" align="center"><input type="submit" required class="btn btn-success" {% if data['edit'] %} name="update" value="Update" {% else %} name="edit" value="Update Profile" {% endif %} ></td>
+        </tr>
+    </table>
+</center>
+</form>
+{% include 'footer.html' %}
+
+
+<style>
+    tr,th,td{
+        border: 0px !important;
+        color: aliceblue;
+    }
+   form{
+    background: url("/static/images/banner3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+   }
+</style>

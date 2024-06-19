@@ -1,0 +1,43 @@
+{% include 'admin_header.html' %}
+
+<div class="top">
+    <h3 align="center" style="padding-top: 100px;color: white;">Registered Organizations</h3>
+</div>
+
+<center>
+   
+    <form action="" method="post">
+        <table class="table table-hover" style="width: 700px;">
+            <tr>
+                <th>slno</th>
+                <th>User Name</th>
+                <th>Food</th>
+                <th>Details</th>
+                <th>rate</th>
+                <th>Date</th>
+            </tr>
+            {% for i in data['res'] %}
+           <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['fname']}}{{i['lname']}}</td>
+            <td>{{i['food']}}</td>
+            <td>{{i['details']}}</td>
+            <td>{{i['rate']}}</td>
+            <td>{{i['date']}}</td>
+            <!-- <td><a href="/{{i['license']}}"><img src="/{{i['license']}}" style="width:150px;height:100px;"></a></td>
+            <td><a href="?action=delete&oid={{i['organization_id']}}" onclick="return  confirm('Are you sure you want to delete?');" class="btn btn-danger btn-sm">delete</a></td> -->
+           
+        </tr>
+           {% endfor %}
+        </table>
+    </form>
+</center>
+
+{% include 'footer.html' %}
+
+
+<style type="text/css">
+    th{
+        font-weight: 800;
+    }
+</style>

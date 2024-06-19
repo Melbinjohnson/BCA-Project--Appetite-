@@ -1,0 +1,62 @@
+{% include 'resturant_header.html' %}
+
+<div class="frm">
+    <center>
+        <form action="" method="post">
+        <h2 class="text-white">Send Complaint</h2>
+        <table class="table" style="width: 500px;">
+            <tr>
+                <th style="color:white">Send Complaint</th>
+                <td><input type="text" name="comp" required class="form-control" pattern="[ a-zA-Z]{1,}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="complaint" value="Register Complaint" class="btn btn-success"></td>
+            </tr>
+        </table>
+    </form>
+    </center>
+</div>
+
+
+<center>
+    <h4 >Recent Complaints</h4>
+
+<table class="table" style="width: 1000px;"> 
+   <tr>
+       <th>index</th>
+       <th>Name</th>
+       <th>Place</th>
+       <th>Phone</th>
+       <th>Email</th>
+       <th>Complaint</th>
+       <th>Date</th>
+       <th>Reply</th>
+       <th>Reply Date</th>
+   </tr>
+       {% for row in data['res'] %}
+   <tr>
+       <td>{{ loop.index }}</td>
+       <td>{{ row['name'] }}</td>
+       <td>{{ row['place'] }}</td>
+       <td>{{ row['phone'] }}</td>
+       <td>{{ row['email'] }}</td>
+       <td>{{ row['complaint'] }}</td>
+       <td>{{ row['date'] }}</td>
+      <td>{{row['reply']}}</td>
+      <td>{{ row['rdate'] }}</td>
+   </tr>
+       {% endfor %}
+</table>
+</center>
+
+<style>
+      .frm{
+        background: url("/static/images/banner1.jpg");
+        padding: 3rem;
+        background-repeat: no-repeat;
+        /* width: 100% !important; */
+        background-size: cover;
+        
+    }
+</style>
+{% include 'footer.html' %}

@@ -1,0 +1,52 @@
+{% include 'deliveryboy_header.html' %}
+
+<div class="top">
+    <h3 align="center" style="padding-top: 100px;color: white;">Request</h3>
+</div>
+
+<center>
+   
+    <form action="" method="post">
+        <table class="table table" >
+            <tr>
+                <th>Slno</th>
+                
+                <th>Food Requested</th>
+                <th>Details</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <!-- <th>License No</th> -->
+            </tr>
+            {% for i in data['viewrequest'] %}
+           <tr>
+            <td>{{loop.index}}</td>
+            
+            <td>{{i['name']}}</td>
+            <td>{{i['place']}}</td>
+            <td>{{i['phone']}}</td>
+            <td>{{i['food']}}</td>
+            <td>{{i['details']}}</td>
+            
+
+            {% if i['rstatus']=='dispatch' %}
+            <td>Dispatched</td>
+            <td><a href="?action=pickup&rid={{i['request_id']}}"  class="btn btn-danger btn-sm">Pickup Delivery</a></td>
+
+            {% elif  i['rstatus']=='pickedup' %}
+            <td>pickup Complete</td>
+            <td><a href="?action=delivered&req_id={{i['request_id']}}" class="btn btn-info btn-sm">Confirm Delivery</a></td> 
+
+           
+            {% elif i['rstatus']=='delivered' %}
+            <td>Delivered</td>
+
+            
+            {% endif %}
+           </tr>
+
+           {% endfor %}
+        </table>
+    </form>
+</center>
+
+{% include 'footer.html' %}

@@ -1,0 +1,71 @@
+{% include 'admin_header.html' %}
+
+
+  
+<center>
+
+
+    {% if data['replysec'] %}
+        <br><br>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Reply</th>
+                <td><input type="text" class="form-control" pattern="[ a-zA-Z]{1,}" name="reply" id=""></td>
+                <td><input type="hidden" class="form-control" name="ok" id="" value="{{data['cid']}}"></td>
+            </tr>
+            <tr>
+               <td align="center" colspan="2"> <input class="btn btn-success" style="margin-top: 10px;" type="submit" name="submit" id=""></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+    {% else %}
+    <div class="top"></div>
+<h4>Recent Complaints</h4>
+
+<table class="table" style="width: 1000px;"> 
+   <tr>
+       <th>slno</th>
+       <th>Name</th>
+       <th>Place</th>
+       <th>Phone</th>
+       <th>Complaint</th>
+       <th>Date</th>
+       <th>Reply</th>
+       <th>Reply Date</th>
+   </tr>
+       {% for row in data['res'] %}
+   <tr>
+       <td>{{ loop.index }}</td>
+       <td>{{ row['name'] }}</td>
+       <td>{{ row['place'] }}</td>
+       <td>{{ row['phone'] }}</td>
+       <td>{{ row['complaint'] }}</td>
+       <td>{{ row['DATE'] }}</td>
+      
+       {% if row['reply'] == 'pending' %}
+        <td><a class="btn btn-success" href="?action=reply&cid={{ row['complaint_id'] }}">Reply Now</a></td>
+       {% else %}
+       <td>{{ row['reply'] }}</td>
+       {% endif %}
+        <td>{{ row['rdate'] }}</td>
+   </tr>
+       {% endfor %}
+</table>
+{% endif %}
+</center>
+{% include 'footer.html' %}
+
+<style>
+    .frm{
+        background: url("/static/images/banner1.jpg");
+        padding: 3rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        
+    }
+    
+</style>

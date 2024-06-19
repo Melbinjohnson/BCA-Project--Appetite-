@@ -1,0 +1,34 @@
+{% include 'admin_header.html' %}
+
+<div class="top">
+    <h3 align="center" style="padding-top: 100px;color: white;">Registered Resturants</h3>
+</div>
+
+<center>
+   
+    <form action="" method="post">
+        <table class="table table-striped" style="width: 700px;">
+            <tr>
+                <th>slno</th>
+                <th>Resturant Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>License</th>
+            </tr>
+            {% for i in data['resturant'] %}
+           <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['name']}}</td>
+            <td>{{i['place']}}</td>
+            <td>{{i['phone']}}</td>
+            <td>{{i['email']}}</td>
+            <td><a href="/{{i['licensenum']}}"><img src="/{{i['licensenum']}}" style="width:150px;height:150px;"></a></td>
+            <td><a href="?rid={{i['resturant_id']}}" onclick="return  confirm('Are you sure you want to delete?');" class="btn btn-danger btn-sm">delete</a></td>
+           </tr>
+           {% endfor %}
+        </table>
+    </form>
+</center>
+
+{% include 'footer.html' %}

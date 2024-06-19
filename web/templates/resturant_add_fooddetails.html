@@ -1,0 +1,72 @@
+{% include 'resturant_header.html' %}
+<div class="frm" style="height: 60vh;display: flex;justify-content: center;align-items: center;">
+    <div class="box">
+<center>
+    <h2 class="text-white">Add Food Details To Share</h2>
+    <form action="" method="post">
+        <table style="width: 500px;" class="table">
+            <tr>
+                <th class="text-white">Food Name</th>
+                <td><input type="text" required class="form-control" pattern="[ a-zA-Z]{1,}" name="fname"></td>
+            </tr>
+            <tr>
+                <th class="text-white">Details</th>
+                <td><input type="text" required class="form-control" pattern="[ a-zA-Z]{1,}" name="det"></td>
+            </tr>
+            <tr>
+                <th class="text-white">Quantity</th>
+                <td><input type="number" min="1" required class="form-control"  name="qty"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="add" value="Add Details" class="btn btn-success btn-sm"></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</div>
+</div>
+
+
+<center>
+    <h2 style="padding-top:30px ;">View Shared Food Details</h2>
+    <table class="table">
+        <tr>
+            <th>slno</th>
+           
+            <th>Food name</th>
+            <th>Food Details</th>
+            <th>Added Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+        {% for i in data['fdetails'] %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['food']}}</td>
+            <td>{{i['details']}}</td>
+            <td>{{i['date']}}</td>
+            <td>{{i['quantity']}}</td>
+            <td>{{i['status']}}</td>
+           <!-- <td> <input type="text" name="id" value="{{i['fooddetails_id']}}"></td> -->
+            {% if i['status']=='active' %}
+            <td><a href="?oid={{i['fooddetails_id']}}"  class="btn btn-danger btn-sm">Inactive</a></td>
+            {% endif %}
+            <td><a href="?fid={{i['fooddetails_id']}}"  class="btn btn-danger btn-sm">delete</a></td>
+            <!-- <td><button>delete</button></td> -->
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+
+{% include 'footer.html' %}
+
+<style>
+    tr,th,td{
+        border: 0px !important;
+    }
+    .box{
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        border-radius: 2px;
+    }
+</style>

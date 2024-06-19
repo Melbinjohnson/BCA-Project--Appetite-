@@ -1,0 +1,55 @@
+{% include 'resturant_header.html' %}
+
+<div class="top">
+    <h3 align="center" style="padding-top: 100px;color: white;">View Requestes</h3>
+</div>
+
+<center>
+   
+    <form action="" method="post">
+        <table class="table table" >
+            <tr>
+                <th>Slno</th>
+                <th>Requester Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Food Requested</th>
+                <th>Details</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <!-- <th>License No</th> -->
+            </tr>
+            {% for i in data['viewrequest'] %}
+           <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['name']}}</td>
+            <td>{{i['place']}}</td>
+            <td>{{i['phone']}}</td>
+            <td>{{i['food']}}</td>
+            <td>{{i['details']}}</td>
+            <td>{{i['quantity']}}</td>
+
+            {% if i['rstatus']=='pending' %}
+            <td>Pending</td>
+            <td><a href="?action=accept&req_id={{i['request_id']}}&quan={{i['quantity']}}" class="btn btn-success btn-sm">Accept</a></td>
+            <td><a href="?action=reject&req_id={{i['request_id']}}&quan={{i['quantity']}}" class="btn btn-danger btn-sm">Reject</a></td>
+            {% elif  i['rstatus']=='accept' %}
+            <td>Accept</td>
+            <td><a href="?action=dispatch&req_id={{i['request_id']}}&quan={{i['quantity']}}" class="btn btn-info btn-sm">Dispatch</a></td>
+
+            {% elif i['rstatus']=='reject' %}
+            <td>Reject</td>
+            {% elif i['rstatus']=='dispatch' %}
+            <td>Dispatch</td>
+            {% elif i['rstatus']=='delivered' %}
+            <td>Delivered</td>
+            {% elif i['rstatus']=='confirm delivery' %}
+            <td>Delivery Confirmed</td>
+            {% endif %}
+           </tr>
+           {% endfor %}
+        </table>
+    </form>
+</center>
+
+{% include 'footer.html' %}

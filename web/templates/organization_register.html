@@ -1,0 +1,88 @@
+{% include 'public_header.html' %}
+
+<script type="text/javascript">
+    
+var check = function() {
+  if (document.getElementById('pass').value ==
+    document.getElementById('con_pass').value) {
+  
+    document.getElementById('msg').style.color = 'green';
+    document.getElementById('msg').innerHTML = 'matching';
+    document.getElementById('op').style.opacity="100"
+  } else {
+ 
+    document.getElementById('msg').style.color = 'red';
+    document.getElementById('msg').innerHTML = 'not matching';
+    document.getElementById('op').style.opacity="0"
+  }
+    }
+
+    
+
+
+</script>
+
+<form action="" method="post" enctype="multipart/form-data">
+<center>
+    <h2 style="padding-top: 60px;">Organization Register</h2>
+    <table class="table" style="width: 500px;">
+        <tr>
+            <th>Organization  Name</th>
+            <td><input type="text" required class="form-control" pattern="[ a-zA-Z]{1,}" name="rname"></td>
+        </tr>
+        <tr>
+            <th>Organization Place</th>
+            <td><input type="text" required class="form-control" pattern="[ a-zA-Z]{1,}" name="place"></td>
+        </tr>
+        <tr>
+            <th>Organization Phone</th>
+            <td><input type="text" required class="form-control" name="phone" maxlength="10" pattern="[0-9]{10}"></td>
+        </tr>
+        <tr>
+            <th>Organization Email</th>
+            <td><input type="email" required class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"></td>
+        </tr>
+        <tr>
+            <th>License </th>
+            <td><input type="file" required class="form-control" name="image"></td>
+        </tr>
+        <tr>
+            <th>User Name</th>
+            <td><input type="text" required class="form-control" name="uname"></td>
+        </tr>
+        <!-- <tr>
+            <th>Password </th>
+            <td><input type="password" required class="form-control" name="passw"></td>
+        </tr> -->
+        <tr>
+                <th id="set">Password</th>
+                <td><input type="password" class=" form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required  name="passw" placeholder="create a password" id="pass" onkeyup="check();" ></td>
+            </tr>
+            <tr>
+                <th id="set">Confirm password</th>
+                <td><input type="password" id="con_pass" class=" form-control" required=""  name="con_pass" placeholder="create a password" onkeyup="check();">
+                    <span id="msg"></span>
+                </td>
+            </tr>
+        <tr>
+            <!-- <th>Resturant Name</th> -->
+            <td colspan="2" align="center" id="op"><input type="submit" required class="btn btn-success" name="rreg"></td>
+        </tr>
+    </table>
+</center>
+</form>
+{% include 'footer.html' %}
+
+
+<style>
+    tr,th,td{
+        border: 0px !important;
+    }
+   form{
+    background: url("/static/resources/register.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+   }
+</style>
