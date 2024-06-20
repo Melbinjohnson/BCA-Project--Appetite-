@@ -93,7 +93,8 @@ def user_update_profile():
 def user_view_food():
     data={}
     lid=request.form['lid']
-    q="(SELECT resturant.name AS rname,fooddetails_id,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus,quantity FROM fooddetails INNER JOIN resturant ON (fooddetails.foodprovided_id=resturant.login_id)) UNION (SELECT CONCAT(user.fname,user.lname) AS rname,fooddetails_id,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus,quantity FROM fooddetails INNER JOIN USER ON (fooddetails.foodprovided_id=user.login_id))"
+    #q="(SELECT resturant.name AS rname,fooddetails_id,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus,quantity FROM fooddetails INNER JOIN resturant ON (fooddetails.foodprovided_id=resturant.login_id)) UNION (SELECT CONCAT(user.fname,user.lname) AS rname,fooddetails_id,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus,quantity FROM fooddetails INNER JOIN USER ON (fooddetails.foodprovided_id=user.login_id))"
+     q="(SELECT resturant.name AS rname,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus,fooddetails_id,quantity FROM fooddetails INNER JOIN resturant ON (fooddetails.foodprovided_id=resturant.login_id)) UNION (SELECT CONCAT(user.fname,user.lname) AS rname,food,details,fooddetails.date AS rdate,fooddetails.status AS rstatus, fooddetails_id,quantity FROM fooddetails INNER JOIN USER ON (fooddetails.foodprovided_id!=user.login_id AND TYPE='user' ))"
     print("------------------------",q)
     res=select(q)
     if res:
@@ -127,7 +128,8 @@ def user_make_request():
 def user_view_request():
     data={}
     id=request.form['lid']
-    q="SELECT *,request.status as rstatus,request.quantity as quantity FROM request INNER JOIN fooddetails ON (fooddetails.fooddetails_id=request.fooddetails_id) WHERE  request.type='user' AND foodrequest_id=(select user_id from user where login_id!='%s')"%(id)
+    #q="SELECT *,request.status as rstatus,request.quantity as quantity FROM request INNER JOIN fooddetails ON (fooddetails.fooddetails_id=request.fooddetails_id) WHERE  request.type='user' AND foodrequest_id=(select user_id from user where login_id!='%s')"%(id)
+    q="SELECT *,request.status as rstatus,request.quantity as quantity FROM request INNER JOIN fooddetails ON (fooddetails.fooddetails_id=request.fooddetails_id) WHERE  request.type='user' AND foodrequest_id IN (select user_id from user where login_id = '%s')"%(id)
     print(q)
     res=select(q)
     if res:
